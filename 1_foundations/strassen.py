@@ -13,7 +13,7 @@ def split(A, n):
     
     return A11, A12, A21, A22
 
-def strassen(A, B, n) 
+def strassen(A, B, n): 
     ''' Matrix multiplication using Strassen algorithm. 
 
 	Parameters
