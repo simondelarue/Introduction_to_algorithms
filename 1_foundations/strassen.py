@@ -3,6 +3,9 @@ Created reated on May 2022
 @author: Simon Delarue <sdelarue@enst.fr>
 """
 
+import numpy as np
+
+
 def split(A, n):
     ''' Split matrix A into submatrices of size n. '''
 
@@ -12,6 +15,7 @@ def split(A, n):
     A22 = A[n:, n:]
     
     return A11, A12, A21, A22
+
 
 def strassen(A, B, n): 
     ''' Matrix multiplication using Strassen algorithm. 
@@ -31,13 +35,13 @@ def strassen(A, B, n):
     B11, B12, B21, B22 = split(B, idx)
     
     # Conquer
-    P1 = Strassen(A11, B12 - B22, n/2)
-    P2 = Strassen(A11 + A12, B22, n/2)
-    P3 = Strassen(A21 + A22, B11, n/2)
-    P4 = Strassen(A22, B21 - B11, n/2)
-    P5 = Strassen(A11 + A22, B11 + B22, n/2)
-    P6 = Strassen(A12 - A22, B21 + B22, n/2)
-    P7 = Strassen(A11 - A21, B11 + B12, n/2)
+    P1 = strassen(A11, B12 - B22, n/2)
+    P2 = strassen(A11 + A12, B22, n/2)
+    P3 = strassen(A21 + A22, B11, n/2)
+    P4 = strassen(A22, B21 - B11, n/2)
+    P5 = strassen(A11 + A22, B11 + B22, n/2)
+    P6 = strassen(A12 - A22, B21 + B22, n/2)
+    P7 = strassen(A11 - A21, B11 + B12, n/2)
 
     C = np.zeros((int(n), int(n)))
     C[:idx, :idx] = P5 + P4 - P2 + P6
